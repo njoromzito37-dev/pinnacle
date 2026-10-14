@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kenya Pinnacle School | Virtual CBC School, Grades 2 to 12</title>
+<style>
+:root{--bg:#fbfaf6;--card:#fff;--ink:#17202a;--mute:#5d6673;--line:#e6e2d6;--pri:#0b6b3a;--priInk:#fff;--acc:#d9a21b;--soft:#eaf4ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1511;--card:#16201a;--ink:#eef3ee;--mute:#a3b0a6;--line:#27352c;--pri:#4ade80;--priInk:#06210f;--acc:#f2c14e;--soft:#14261b}}
+:root[data-theme="dark"]{--bg:#0e1511;--card:#16201a;--ink:#eef3ee;--mute:#a3b0a6;--line:#27352c;--pri:#4ade80;--priInk:#06210f;--acc:#f2c14e;--soft:#14261b}
+html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,'Times New Roman',serif}
+h1,h2,h3,nav,button,.btn,label,input,select,textarea{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--pri)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.logo{font-weight:800;font-size:18px;color:var(--ink);text-decoration:none}.logo span{color:var(--acc)}
+.links{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.links a{text-decoration:none;color:var(--ink);font-size:15px}
+.btn{display:inline-block;background:var(--pri);color:var(--priInk);border:0;border-radius:10px;padding:12px 20px;font-weight:700;text-decoration:none;cursor:pointer;font-size:16px;min-height:44px}
+.btn.alt{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.hero{background:var(--soft);padding:64px 0 56px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.1;margin:0 0 14px}
+.hero p{max-width:620px;font-size:19px;color:var(--mute)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+section{padding:52px 0}
+h2{font-size:30px;margin:0 0 8px}.lead{color:var(--mute);margin:0 0 24px;max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{margin:0 0 6px;font-size:19px}.card p{margin:0;color:var(--mute);font-size:16px}
+.tag{display:inline-block;font:700 12px system-ui,sans-serif;background:var(--soft);color:var(--pri);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.alt-bg{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+form{display:grid;gap:12px;max-width:560px}
+label{font-size:14px;font-weight:600}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:16px}
+.ok{background:var(--soft);border:1px solid var(--pri);border-radius:12px;padding:16px;display:none}
+footer{padding:28px 0;border-top:1px solid var(--line);color:var(--mute);font:14px system-ui,sans-serif}
+.note{font:13px system-ui,sans-serif;color:var(--mute)}
+</style>
+</head>
+<body>
+<canvas id="bgc" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none"></canvas>
+<style>body{background:transparent!important}.hero,.alt-bg{background:rgba(255,255,255,.4)!important}@media (prefers-color-scheme:dark){.hero,.alt-bg{background:rgba(0,0,0,.3)!important}}</style>
+<script>
+(function(){var cv=document.getElementById('bgc');if(!cv||!cv.getContext)return;
+var x=cv.getContext('2d'),W=0,H=0,A=[],th,raf=0,dk=window.matchMedia('(prefers-color-scheme: dark)'),rm=window.matchMedia('(prefers-reduced-motion: reduce)'),Rn=Math.random;
+var T={
+site:{l:['#e6f7df','#fff3cf'],d:['#0c2216','#1e2a0e'],f:['#f472b6','#fbbf24','#fb7185','#a78bfa','#34d399'],q:1},
+lp:{l:['#ffd9ec','#d9f0ff'],d:['#3b1031','#0d2f4d'],f:['#ff6fb5','#ffd93d','#ff8c42','#6bd6ff','#9b7bff','#4ade80'],q:1.3},
+up:{l:['#d6f1ff','#d9fbe9'],d:['#0b2a3f','#0b3a2c'],f:['#38bdf8','#22d3ee','#34d399','#fbbf24','#f472b6'],q:1},
+js:{l:['#eadcff','#ffd9ec'],d:['#2a1250','#42102f'],f:['#a78bfa','#f472b6','#c084fc','#fb7185','#60a5fa'],q:1},
+ss:{l:['#d9e2ff','#e5dcff'],d:['#0b1230','#1a1040'],f:['#6366f1','#22d3ee','#f472b6','#fbbf24','#34d399'],q:.8},
+lib:{l:['#fff0d1','#e5f5d9'],d:['#2b1d08','#10261a'],f:['#f59e0b','#fb923c','#facc15','#84cc16','#f472b6'],q:1},
+admin:{l:['#e3ecf6','#eef2f7'],d:['#101a28','#15202e'],f:['#60a5fa','#94a3b8','#2dd4bf','#a5b4fc'],q:.5},
+teacher:{l:['#dff7ee','#e0ecff'],d:['#0a2a22','#0e1f3d'],f:['#2dd4bf','#60a5fa','#34d399','#fbbf24'],q:.9},
+parent:{l:['#ffe8d6','#ffe0ea'],d:['#38200f','#3a1020'],f:['#fb923c','#fb7185','#fbbf24','#f472b6'],q:.9}};
+function size(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight}
+function make(){A=[];var s=Math.max(.5,Math.min(1,W/900))*th.q,nf=Math.round(14*s),nb=Math.round(18*s),i;
+for(i=0;i<nf;i++)A.push({k:'f',x:Rn()*W,y:Rn()*H,r:14+Rn()*26,a:Rn()*6.3,sp:(Rn()-.5)*.012,v:-(.15+Rn()*.35),w:Rn()*6.3,c:th.f[i%th.f.length]});
+for(i=0;i<nb;i++)A.push({k:'b',x:Rn()*W,y:Rn()*H,r:6+Rn()*20,v:-(.3+Rn()*.7),w:Rn()*6.3,h:170+Rn()*130})}
+function flower(p){x.save();x.translate(p.x,p.y);x.rotate(p.a);x.globalAlpha=.6;x.fillStyle=p.c;
+for(var i=0;i<6;i++){x.rotate(Math.PI/3);x.beginPath();x.ellipse(0,-p.r*.55,p.r*.27,p.r*.55,0,0,6.3);x.fill()}
+x.globalAlpha=.9;x.fillStyle='#fde047';x.beginPath();x.arc(0,0,p.r*.22,0,6.3);x.fill();x.restore()}
+function bubble(p){x.save();x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fillStyle='hsla('+p.h+',85%,70%,.18)';x.fill();x.lineWidth=1.5;x.strokeStyle='hsla('+p.h+',85%,60%,.55)';x.stroke();
+x.beginPath();x.arc(p.x-p.r*.35,p.y-p.r*.35,p.r*.22,0,6.3);x.fillStyle='rgba(255,255,255,.7)';x.fill();x.restore()}
+function fr(){var c=dk.matches?th.d:th.l,g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,c[0]);g.addColorStop(1,c[1]);x.fillStyle=g;x.fillRect(0,0,W,H);
+for(var i=0;i<A.length;i++){var p=A[i];p.w+=.012;p.x+=Math.sin(p.w)*(p.k==='f'?.5:.35);p.y+=p.v;if(p.y<-70)p.y=H+70;if(p.k==='f'){p.a+=p.sp;flower(p)}else bubble(p)}
+raf=rm.matches?0:requestAnimationFrame(fr)}
+window.setBg=function(n){var t=T[n]||T.site;if(t===th&&raf)return;th=t;if(!W)size();make();cancelAnimationFrame(raf);fr()};
+window.addEventListener('resize',function(){if(!th)return;size();make();if(rm.matches)fr()});
+})();
+</script>
+<script>setBg("site")</script>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><svg viewBox="0 0 140 164" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kenya Pinnacle School crest" width="32" height="38" style="vertical-align:middle;margin-right:8px"><defs><clipPath id="pnc-sh"><path d="M28 14H112V68C112 98 92 118 70 128C48 118 28 98 28 68Z"/></clipPath><path id="pnc-rb" d="M24 140Q70 156 116 140"/></defs><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(49.5 128.4) rotate(-228)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(38.2 122.9) rotate(-216)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(28.3 115.2) rotate(-204)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(20.3 105.6) rotate(-192)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(14.4 94.5) rotate(-180)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(10.9 82.4) rotate(-168)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(10.0 69.9) rotate(-156)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(11.8 57.5) rotate(-144)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(16.1 45.7) rotate(-132)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(22.7 35.1) rotate(-120)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(31.4 26.0) rotate(-108)" fill="#2e8b4f"/><g transform="translate(140 0) scale(-1 1)"><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(49.5 128.4) rotate(-228)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(38.2 122.9) rotate(-216)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(28.3 115.2) rotate(-204)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(20.3 105.6) rotate(-192)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(14.4 94.5) rotate(-180)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(10.9 82.4) rotate(-168)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(10.0 69.9) rotate(-156)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(11.8 57.5) rotate(-144)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(16.1 45.7) rotate(-132)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(22.7 35.1) rotate(-120)" fill="#2e8b4f"/><ellipse cx="0" cy="0" rx="3.4" ry="7.5" transform="translate(31.4 26.0) rotate(-108)" fill="#2e8b4f"/></g><g clip-path="url(#pnc-sh)"><rect x="20" y="10" width="100" height="64" fill="#2f7fc1"/><rect x="20" y="72" width="100" height="62" fill="#0b6b3a"/><circle cx="70" cy="36" r="8" fill="#f6c945"/><path d="M30 74L56 40L68 56L82 34L112 74Z" fill="#dfe9f1"/><path d="M56 40L62 49L56 47L51 50ZM82 34L88 44L82 42L76 45Z" fill="#fff"/></g><path d="M28 14H112V68C112 98 92 118 70 128C48 118 28 98 28 68Z" fill="none" stroke="#d9a21b" stroke-width="3.5"/><path d="M38 85Q54 80 70 87Q86 80 102 85V105Q86 100 70 107Q54 100 38 105Z" fill="#fff" stroke="#d9a21b" stroke-width="1.8"/><path d="M70 87V107" stroke="#d9a21b" stroke-width="1.8"/><path d="M16 126Q70 146 124 126V146Q70 166 16 146Z" fill="#b91c1c"/><text font-family="Georgia,serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1.5"><textPath href="#pnc-rb" startOffset="50%">PINNACLE</textPath></text></svg>Kenya <span>Pinnacle</span> School</a>
+  <div class="links">
+    <a href="#levels">Learning levels</a><a href="#features">Features</a><a href="#labs">Virtual labs</a><a href="#admissions">Admissions</a><a href="#contact">Contact</a>
+    <a href="https://claude.ai/artifact/YYub6rrnZ9kfXWPWCvZoRm" target="_blank" rel="noreferrer">Library</a><a href="https://claude.ai/artifact/WxMf2X2mLC1S8TtrCyNu1w" target="_blank" rel="noreferrer">Games</a><a href="https://claude.ai/artifact/DxNZ2GuYbCMBWDkkETWptR" target="_blank" rel="noreferrer">Labs</a><a class="btn" href="https://claude.ai/artifact/HwcPk68EkDyW3DTrPci1WZ" target="_blank" rel="noreferrer">Portal login</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <h1>Reaching the summit of excellence, from wherever you are.</h1>
+  <p>Kenya Pinnacle School is a virtual school following the Kenyan Competency-Based Curriculum for Grades 2 to 12, with live classes, virtual labs and a digital library.</p>
+  <div class="cta"><a class="btn" href="#admissions">Apply for admission</a><a class="btn alt" href="#features">See how it works</a></div>
+</div></header>
+
+<section id="levels"><div class="wrap">
+  <h2>Learning levels</h2>
+  <p class="lead">Each learner sees a portal built for their stage, from simple audio-guided activities to pathway-based senior school.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">Grades 2 to 3</span><h3>Lower Primary</h3><p>Literacy and numeracy activity tracks with a simple layout and audio prompts.</p></div>
+    <div class="card"><span class="tag">Grades 4 to 6</span><h3>Upper Primary</h3><p>Science, Agriculture, Creative Arts and Social Studies with guided exploration.</p></div>
+    <div class="card"><span class="tag">Grades 7 to 9</span><h3>Junior School</h3><p>Broad-based learning including Integrated Science, Pre-Technical Studies and Business Studies.</p></div>
+    <div class="card"><span class="tag">Grades 10 to 12</span><h3>Senior School</h3><p>Pathways in STEM, Social Sciences, and Arts and Sports Science.</p></div>
+  </div>
+</div></section>
+
+<section id="features" class="alt-bg"><div class="wrap">
+  <h2>How learning works</h2>
+  <p class="lead">Everything a learner, teacher and parent needs sits in one place.</p>
+  <div class="grid">
+    <div class="card"><h3>Live Google Meet classes</h3><p>A timetable with quick-join links. Attendance is recorded when learners join through the portal.</p></div>
+    <div class="card"><h3>Competency tracking</h3><p>Progress shown as Exceeding, Meeting, Approaching or Below expectations, based on continuous assessment.</p></div>
+    <div class="card"><h3>Assignments and portfolio</h3><p>Submit work online and build a digital portfolio that teachers can comment on.</p></div>
+    <div class="card"><h3>Parent view</h3><p>Follow attendance, progress and fee balances in one dashboard.</p></div>
+  </div>
+</div></section>
+
+<section id="labs"><div class="wrap">
+  <h2>Virtual labs and digital library</h2>
+  <p class="lead">Practical learning without a physical lab, plus a searchable library sorted by grade and subject.</p>
+  <div class="grid">
+    <div class="card"><h3>Science labs</h3><p>Titration, circuits, mechanics, dissection, ecosystems and microscope slides.</p></div>
+    <div class="card"><h3>Geography</h3><p>Map reading, landscape tools and weather tracking.</p></div>
+    <div class="card"><h3>Languages</h3><p>English, Kiswahili and other languages with pronunciation and grammar practice.</p></div>
+    <div class="card"><h3>Music</h3><p>Digital piano, traditional instruments and rhythm training.</p></div>
+    <div class="card"><h3>Library</h3><p>E-books, revision papers, videos, quizzes and audio kits filtered by grade, subject and type.</p></div>
+  </div>
+</div></section>
+
+<section id="admissions" class="alt-bg"><div class="wrap">
+  <h2>Admissions</h2>
+  <p class="lead">Tell us about your child and we will get back to you with next steps.</p>
+  <form id="adm">
+    <div><label for="pn">Parent or guardian name</label><input id="pn" required></div>
+    <div><label for="em">Email or phone</label><input id="em" required></div>
+    <div><label for="ln">Learner name</label><input id="ln" required></div>
+    <div><label for="gr">Grade applying for</label>
+      <select id="gr"><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select></div>
+    <div id="pw" hidden><label for="pth">Preferred pathway</label>
+      <select id="pth"><option>STEM</option><option>Social Sciences</option><option>Arts and Sports Science</option></select></div>
+    <div><label for="msg">Message (optional)</label><textarea id="msg" rows="3"></textarea></div>
+    <button class="btn" type="submit">Submit application</button>
+    <div class="ok" id="ok" role="status"></div>
+    <p class="note">This demo form does not send data anywhere yet. It needs a backend or email service before real use.</p>
+  </form>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <p class="lead">Reach us by email or phone.</p>
+  <div class="grid">
+    <div class="card"><h3>Email</h3><p>njoromzito@gmail.com</p></div>
+    <div class="card"><h3>Phone / WhatsApp</h3><p>0721954896 / 0785636438</p></div>
+    <div class="card"><h3>Office hours</h3><p>Monday to Friday, 8:00 am to 5:00 pm (EAT)</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">&copy; Kenya Pinnacle School. Follows the Kenyan Competency-Based Curriculum.</div></footer>
+
+<script>
+(function(){
+  var gr=document.getElementById('gr'),pw=document.getElementById('pw');
+  gr.addEventListener('change',function(){pw.hidden=parseInt(gr.value.replace(/\D/g,''),10)<10});
+  document.getElementById('adm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=document.getElementById('ok');
+    ok.textContent='Thank you, '+document.getElementById('pn').value+'. Your application for '+document.getElementById('ln').value+' ('+gr.value+') has been noted. We will contact you soon.';
+    ok.style.display='block';
+  });
+})();
+</script>
+</body>
+</html>
